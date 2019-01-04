@@ -17,9 +17,21 @@
 
 #include <iostream>
 
+using namespace std;
 int main(int argc, const char * argv[]) {
 
 
-    std::cout << "hi you too!\n";
+    std::cout << "Euler Problem #1\n";
+    
+    int sum = 0;
+    for (int i=0; i<10; i++) {
+        
+        if (i % 3 ==0 || i % 5 == 0) {
+            cout << i << endl;
+            sum += i;
+        }
+    }
+    
+    cout << "sum" << sum << endl;
     return 0;
 }

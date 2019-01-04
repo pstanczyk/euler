@@ -21,7 +21,7 @@ using namespace std;
 int main(int argc, const char * argv[]) {
 
 
-    std::cout << "Euler Problem #1\n";
+    std::cout << "Euler Problem #1 : \n";
     
     int sum = 0;
     for (int i=0; i<10; i++) {

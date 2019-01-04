@@ -20,6 +20,6 @@
 int main(int argc, const char * argv[]) {
 
 
-    std::cout << "Hello, World!\n";
+    std::cout << "hi you too!\n";
     return 0;
 }

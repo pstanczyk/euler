@@ -15,30 +15,41 @@
  Find the sum of all the multiples of 3 or 5 below 1000.
  **/
 
+/**
+ Notes:
+ examples of using the clock / timing functionality
+ https://en.cppreference.com/w/cpp/chrono/system_clock/now
+ 
+ **/
 #include <iostream>
 
 using namespace std;
 int main(int argc, const char * argv[]) {
 
+    std::cout << "Euler Problem #1\n"; // Helpful message to tell us what we are doing
 
-    std::cout << "Euler Problem #1\n";
-
-    const int iterationLimit = 1000;
-    int sum = 0;
+    const int iterationLimit = 1000; // The amount we are looping to
+    int sum = 0; // The answer!
     
-    // reference implementation
+    //
+    // Reference implementation
+    // Loop over all the numbers upto the iteration limit and simply check if they are
+    // divisible by 3 or 5
     auto start = std::chrono::system_clock::now();
     for (int i=0; i<iterationLimit; i++) {
-
         if (i % 3 ==0 || i % 5 == 0) {
             sum += i;
         }
     }
     auto end = std::chrono::system_clock::now();
-    std::chrono::duration<double> diff = end-start;
+    std::chrono::duration<double> diffReference = end-start;
+    cout << "reference implemention : sum " << sum << " time : " << diffReference.count() << " s\n";
 
-    cout << "reference implemention : sum " << sum << " time : " << diff.count() << " s\n";
-
+    //
+    // Optimised Implementation
+    // Loop in increments of 3 then 5 and sum up as we go along
+    // We take care to make sure we don;t double count by having a third loop that goes
+    // in increments of 3x5=15 and removes those values
     start = std::chrono::system_clock::now();
     // factors of 3
     sum = 0;
@@ -54,8 +65,10 @@ int main(int argc, const char * argv[]) {
         sum -= i;
     }
     end = std::chrono::system_clock::now();
-    diff = end-start;
+    std::chrono::duration<double> diffOptimised = end-start;
+    cout << "optimised implemention : sum " << sum << " time : " << diffOptimised.count() << " s\n";
     
-    cout << "optimised implemention : sum " << sum << " time : " << diff.count() << " s\n";
+    cout << "speed up factor : x" << diffReference.count() / diffOptimised.count() << endl;
+    // Return success
     return 0;
 }

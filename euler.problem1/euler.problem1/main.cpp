@@ -22,16 +22,40 @@ int main(int argc, const char * argv[]) {
 
 
     std::cout << "Euler Problem #1\n";
-    
+
+    const int iterationLimit = 1000;
     int sum = 0;
-    for (int i=0; i<10; i++) {
-        
+    
+    // reference implementation
+    auto start = std::chrono::system_clock::now();
+    for (int i=0; i<iterationLimit; i++) {
+
         if (i % 3 ==0 || i % 5 == 0) {
-            cout << i << endl;
             sum += i;
         }
     }
+    auto end = std::chrono::system_clock::now();
+    std::chrono::duration<double> diff = end-start;
+
+    cout << "reference implemention : sum " << sum << " time : " << diff.count() << " s\n";
+
+    start = std::chrono::system_clock::now();
+    // factors of 3
+    sum = 0;
+    for (int i=0; i<iterationLimit; i+=3) {
+        sum += i;
+    }
+    // factors of 5
+    for (int i=0; i<iterationLimit; i+=5) {
+        sum += i;
+    }
+    // remove duplicates
+    for (int i=0; i<iterationLimit; i+=15) {
+        sum -= i;
+    }
+    end = std::chrono::system_clock::now();
+    diff = end-start;
     
-    cout << "sum" << sum << endl;
+    cout << "optimised implemention : sum " << sum << " time : " << diff.count() << " s\n";
     return 0;
 }
